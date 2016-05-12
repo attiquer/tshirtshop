@@ -1,0 +1,7 @@
+
+ERRNO: 2
+TEXT: require_once(nonexistant.php): failed to open stream: No such file or directory
+LOCATION: /var/www/html/tshirtshop/index.php
+LINE: 18at: May 10, 2016, 7:15 pm
+showing backtrace: 
+require_once() # line   18, file: /var/www/html/tshirtshop/index.php
