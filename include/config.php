@@ -1,42 +1,53 @@
 <?php
-//site root folder
+// SITE_ROOT contains the full path to the tshirtshop folder
 define('SITE_ROOT', dirname(dirname(__FILE__)));
 
-//Application directories
+// Application directories
 define('PRESENTATION_DIR', SITE_ROOT . '/presentation/');
 define('BUSINESS_DIR', SITE_ROOT . '/business/');
 
-//Settings for smarty template engine
+// Settings needed to configure the Smarty template engine
 define('SMARTY_DIR', SITE_ROOT . '/libs/smarty/');
 define('TEMPLATE_DIR', PRESENTATION_DIR . 'templates');
 define('COMPILE_DIR', PRESENTATION_DIR . 'templates_c');
 define('CONFIG_DIR', SITE_ROOT . '/include/configs');
 
-
-//set true warnings and errors
+// These should be true while developing the web site
 define('IS_WARNING_FATAL', true);
 define('DEBUGGING', true);
 
-//error types to be reported
+// The error types to be reported
 define('ERROR_TYPES', E_ALL);
 
-//setting about mailing the error message
+// Settings about mailing the error messages to admin
 define('SEND_ERROR_MAIL', false);
-define('ADMIN_ERROR_MAIL', 'admin@example.com');
-define('SEND_MAIL_FROM', 'errors@example.com');
-ini_set('sendmail_from', SEND_MAIL_FROM);
+define('ADMIN_ERROR_MAIL', 'Administrator@example.com');
+define('SENDMAIL_FROM', 'Errors@example.com');
+ini_set('sendmail_from', SENDMAIL_FROM);
 
-//error logging settings
-define('LOG_ERRORS', true);
-define('LOG_ERRORS_FILE', '/var/www/html/tshirtshop/errors.log');
+// By default we don't log errors to a file
+define('LOG_ERRORS', false);
+//define('LOG_ERRORS_FILE', 'c:\\tshirtshop\\errors_log.txt'); // Windows
+define('LOG_ERRORS_FILE', SITE_ROOT.'/errors.log'); // Linux
+/* Generic error message to be displayed instead of debug info
+   (when DEBUGGING is false) */
+define('SITE_GENERIC_ERROR_MESSAGE', '<h1>TShirtShop Error!</h1>');
 
-//Generic message to be displayed instead of error when debugging is false
-define('SITE_GENERIC_ERROR_MESSAGE', '<h2>Tshirt Error Message</h2>');
-
-//Database connection config
-define('DB_PERSISTANCY', 'true');
-define('DB_SERVER', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASSWORD', 'mage7321');
-define('DB_DATABASE', 'tshirtshop');
+// Database connectivity setup
+define('DB_PERSISTENCY', 'true');
+define('DB_SERVER', '46.37.167.132');
+define('DB_USERNAME', 'leven_ar');
+define('DB_PASSWORD', 'hxhvPpoX?6Q07oqr');
+define('DB_DATABASE', 'leveninternet_ar');
 define('PDO_DSN', 'mysql:host=' . DB_SERVER . ';dbname=' . DB_DATABASE);
+
+// Server HTTP port (can omit if the default 80 is used)
+define('HTTP_SERVER_PORT', '80');
+/* Name of the virtual directory the site runs in, for example:
+   '/tshirtshop/' if the site runs at http://www.example.com/tshirtshop/
+   '/' if the site runs at http://www.example.com/ */
+define('VIRTUAL_LOCATION', '/site-previews/php/tshirtshop/');
+
+//product list display options
+define('SHORT_PRODUCT_DESCRIPTION_LENGTH', 150);
+define('PRODUCTS_PER_PAGE', 4);
