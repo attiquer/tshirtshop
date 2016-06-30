@@ -11,8 +11,20 @@ class DepartmentsList
   {
     /* If DepartmentId exists in the query string, we're visiting a
        department */
-    if (isset ($_GET['DepartmentId']))
+    if (isset ($_GET['DepartmentId'])) {
       $this->mSelectedDepartment = (int)$_GET['DepartmentId'];
+    }
+    elseif (isset($_GET['ProductId']) && isset($_SESSION['link_to_continue_shopping']))
+    {
+      $continue_shopping = Link::QueryStringToArray($_SESSION['link_to_continue_shopping']);
+
+      if(array_key_exists('DepartmentId', $continue_shopping))
+      {
+        $this->mSelectedDepartment = (int)$continue_shopping['DepartmentId'];
+      }
+    }
+
+
   }
 
   /* Calls business tier method to read departments list and create

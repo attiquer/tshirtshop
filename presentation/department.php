@@ -29,10 +29,9 @@ class Department{
         //if visiting category
         if (isset($_GET['CategoryId'])) {
             $category_details = Catalog::GetCategoryDetails($this->_mCategoryId);
-            $this->mName = $category_details['name'];
+            $this->mName = $department_Details['name'] . '&raquo;' .$category_details['name'];
             $this->mDescription = $category_details['description'];
 
         }
     }
-
 }

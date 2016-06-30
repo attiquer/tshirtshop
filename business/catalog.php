@@ -14,7 +14,7 @@ class Catalog
   }
 
   public static function  GetDepartmentDetails($departmentId){
-    $sql = 'CALL catalog_get_category_details(:departmentId)';
+    $sql = 'CALL catalog_get_department_details(:departmentId)';
 
     //build the parameters array
     $params = array(':departmentId' =>$departmentId);
@@ -35,7 +35,7 @@ class Catalog
         return DatabaseHandler::GetAll($sql, $params);
     }
 
-    public function GetCategoryDetails($catId)
+    public static function GetCategoryDetails($catId)
     {
         $sql = 'CALL catalog_get_category_details(:categoryId)';
 
@@ -63,10 +63,10 @@ class Catalog
         }
         else{
             //execute the query to retrieve number of pages from db
-            $item_count = DatabaseHandler::GetRow($countSql, $countSqlParams);
+            $items_count = DatabaseHandler::GetOne($countSql, $countSqlParams);
 
             //calculate the number of pages
-            $how_many_pages = ceil($item_count / PRODUCTS_PER_PAGE);
+            $how_many_pages = ceil($items_count / PRODUCTS_PER_PAGE);
 
             //save the query and its count in session
             $_SESSION['how_many_pages'] = $how_many_pages;
@@ -124,13 +124,14 @@ class Catalog
 
     }
 
-    public static function GetProductsOnCatalog($pageNo, &$rHowManyPages){
+    public static function GetProductsOnCatalog($pageNo, &$rHowManyPages)
+    {
 
         //build sql query
-        $sql = 'CALL catalog_get_products_on_catalog()';
+        $sql = 'CALL catalog_count_products_on_catalog()';
 
         //calculate number of pages
-        $rHowManyPages = Catalog::HowManyPages($sql, null);
+        $rHowManyPages = self::HowManyPages($sql, null);
 
         //calculate start item
         $startItem = ($pageNo - 1) * PRODUCTS_PER_PAGE;
@@ -143,7 +144,6 @@ class Catalog
 
         //execute and return the query resutls
         return DatabaseHandler::GetAll($sql, $params);
-
     }
 
     public static function GetProductDetails($productId){

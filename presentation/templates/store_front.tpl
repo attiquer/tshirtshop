@@ -28,6 +28,7 @@
         </div>
         <div class="yui-b">
           {include file="departments_list.tpl"}
+          {include file=$obj->mCategoriesCell}
         </div>
       </div>
     </div>
